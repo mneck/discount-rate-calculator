@@ -1,5 +1,5 @@
 # discount-rate-calculator
-A tool to calculate future benefits as a lump sum in BC litigation
+A tool to calculate future benefits as a lump sum in BC litigation.
 
 Present Value is the current value of a future sum of money at a specific rate of return. To put it simply, money not spent today may lose value in the future owing to the inflation rate or the rate of return has the money been invested. So, the present value concept suggests that money is worth more now than in the future.
 
