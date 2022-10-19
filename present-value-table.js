@@ -1,4 +1,4 @@
-const cards = [
+const discountValues = [
   {
     year: 0,
     value: 0,
