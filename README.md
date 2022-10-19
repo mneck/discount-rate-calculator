@@ -1,6 +1,6 @@
 # discount-rate-calculator
 
-A tool to calculate future benefits as a lump sum in BC litigation. None of the information provided herein is intended as legal advice. Do not rely on any of this information as legal advice. If you have a legal problem, consult a lawyer.
+A tool to calculate future benefits as a lump sum in BC litigation. None of the information provided here is intended as legal advice. Do not rely on any of this information as legal advice. If you have a legal problem, consult a lawyer.
 
 Examples:
 
