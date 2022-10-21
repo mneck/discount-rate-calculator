@@ -1,3 +1,16 @@
+// Selecting form inputs
+// - date of birth
+// - date of denial
+// - end date
+// - monthly benefits
+// - apply discounts (yes or no)
+// - submit button
+// - cancel button
+
+// Event listeners
+// - submit button should send data from form
+// - cancel button should reset form fields
+
 /*
 
 - Lisa was born on Jan 1, 1982. She was denied benefits on Jan 1, 2022. Her net monthly benefit is $1000 less CPPD. Her benefits would be paid until she turns 65.
