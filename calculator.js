@@ -1,15 +1,32 @@
-// Selecting form inputs
-// - date of birth
-// - date of denial
-// - end date
-// - monthly benefits
-// - apply discounts (yes or no)
-// - submit button
-// - cancel button
+const dateOfBirthInput = document.getElementById("dateOfBirth");
+const dateOfDenialInput = document.getElementById("dateOfDenial");
+const endDateInput = document.getElementById("endDate");
+const monthlyBenefitsInput = document.getElementById("monthlyBenefits");
+const resultsDOM = document.getElementById("results");
+console.log(resultsDOM);
+// need to access the response (boolean) from the "apply discount" question in the form
+const form = document.querySelector(".form");
+const submitBtn = document.getElementById("submitBtn");
+const resetBtn = document.getElementById("resetBtn");
 
-// Event listeners
-// - submit button should send data from form
-// - cancel button should reset form fields
+submitBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+  console.log("submit button was clicked");
+  const dateOfBirth = dateOfBirthInput.value;
+  const dateOfDenial = dateOfDenialInput.value;
+  const endDate = endDateInput.value;
+  const monthlyBenefits = monthlyBenefitsInput.value;
+  // need to access the response (boolean) from the "apply discount" question in the form
+  console.log(`date of birth is: ${dateOfBirth}`);
+  console.log(`date of denial is: ${dateOfDenial}`);
+  console.log(`End Date Prescribed in Client's Claim is: ${endDate}`);
+  console.log(`monthly benefits are: ${monthlyBenefits}`);
+  resultsDOM.classList.remove("is-hidden");
+});
+
+resetBtn.addEventListener("click", () => {
+  console.log("reset button was clicked");
+});
 
 /*
 
