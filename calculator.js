@@ -1,32 +1,70 @@
+// selecting DOM elements & form response data
 const dateOfBirthInput = document.getElementById("dateOfBirth");
 const dateOfDenialInput = document.getElementById("dateOfDenial");
 const endDateInput = document.getElementById("endDate");
+const dateofSettlementClaimInput = document.getElementById("settlementClaim");
 const monthlyBenefitsInput = document.getElementById("monthlyBenefits");
 const resultsDOM = document.getElementById("results");
-console.log(resultsDOM);
-// need to access the response (boolean) from the "apply discount" question in the form
+// need to somehow access the response (boolean) from the "apply discount" question in the form
 const form = document.querySelector(".form");
 const submitBtn = document.getElementById("submitBtn");
 const resetBtn = document.getElementById("resetBtn");
 
+// get form submissions from user
 submitBtn.addEventListener("click", (e) => {
   e.preventDefault();
-  console.log("submit button was clicked");
+  // console.log("submit button was clicked");
   const dateOfBirth = dateOfBirthInput.value;
   const dateOfDenial = dateOfDenialInput.value;
-  const endDate = endDateInput.value;
+  const endOfBenefits = endDateInput.value;
+  const settlementClaim = dateofSettlementClaimInput.value;
   const monthlyBenefits = monthlyBenefitsInput.value;
-  // need to access the response (boolean) from the "apply discount" question in the form
-  console.log(`date of birth is: ${dateOfBirth}`);
-  console.log(`date of denial is: ${dateOfDenial}`);
-  console.log(`End Date Prescribed in Client's Claim is: ${endDate}`);
-  console.log(`monthly benefits are: ${monthlyBenefits}`);
+
+  // still need to access the response (boolean) from the "apply discount" question in the form
+
   resultsDOM.classList.remove("is-hidden");
+  calculateBenefitPeriod(dateOfBirth, endOfBenefits);
+  calculatePastBenefitsOwing(dateOfDenial, settlementClaim);
+  calculateFutureBenefitsOwing(settlementClaim, endOfBenefits);
 });
 
+// reset form
 resetBtn.addEventListener("click", () => {
   console.log("reset button was clicked");
+  resultsDOM.classList.add("is-hidden");
 });
+
+// calculate client's benefit period - days between DATE OF DENIAL and END OF BENEFIT PERIOD
+
+const calculateBenefitPeriod = (birth, end) => {
+  const birthDate = new Date(birth);
+  const endDate = new Date(end);
+  const differenceInTime = endDate.getTime() - birthDate.getTime();
+  const differenceInDays = differenceInTime / (1000 * 60 * 60 * 24);
+  console.log(`benefit period is ${differenceInDays} days`);
+};
+
+// calculate PAST BENEFITS OWING: number of days between DATE OF DENIAL and PROPOSAL DATE
+
+const calculatePastBenefitsOwing = (denial, proposal) => {
+  const denialDate = new Date(denial);
+  const proposalDate = new Date(proposal);
+  const differenceInTime = proposalDate.getTime() - denialDate.getTime();
+  const differenceInDays = differenceInTime / (1000 * 60 * 60 * 24);
+  console.log(`past benefits are owed for ${differenceInDays} days`);
+};
+
+// calculate FUTURE BENEFITS OWING:  number of days between PROPOSAL DATE and END OF BENEFIT PERIOD
+
+const calculateFutureBenefitsOwing = (proposal, end) => {
+  const proposalDate = new Date(proposal);
+  const endDate = new Date(end);
+  const differenceInTime = endDate.getTime() - proposalDate.getTime();
+  const differenceInDays = differenceInTime / (1000 * 60 * 60 * 24);
+  console.log(`future benefits are owed for ${differenceInDays} days`);
+};
+
+// convert monthly benefits into daily?
 
 /*
 
