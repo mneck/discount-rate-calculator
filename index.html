@@ -40,54 +40,56 @@
               Please provide your client's information here:
             </h2>
             <!-- Form -->
-            <form class="form">
-              <!-- Date of Birth -->
+            <form class="form" name="form">
+              <!-- Date of Birth
              <div class="field">
                <label class="label">Client's Date of Birth</label>
                <div class="control">
                  <input id="dateOfBirth" class="input" type="date" placeholder="Text input" />
                </div>
-             </div>
+             </div> -->
              <!-- Date of Denial -->
              <div class="field">
                <label class="label">Client's Date of Denial</label>
                <div class="control">
-                 <input id="dateOfDenial" class="input" type="date" placeholder="Text input" />
+                 <input id="dateOfDenial" class="input" type="date" placeholder="Text input"  />
                </div>
              </div>
              <!-- End Date -->
              <div class="field">
-               <label class="label">End Date Prescribed in Client's Claim</label>
+               <label class="label">End Date Prescribed in Client's Claim (client's 65th birthdate)</label>
                <div class="control">
-                 <input id="endDate" class="input" type="date" placeholder="Text input" />
+                 <input id="endDate" class="input" type="date" placeholder="Text input"  />
                </div>
               </div>
                 <!-- Date of Settlement Claim -->
              <div class="field">
                <label class="label">Date of Settlement Claim</label>
                <div class="control">
-                 <input id="settlementClaim" class="input" type="date" placeholder="Text input" />
+                 <input id="settlementClaim" class="input" type="date" placeholder="Text input"  />
                </div>
               </div>
               <!-- Monthly Benefits -->
               <div class="field">
               <label class="label">Client's Monthly Benefits </label>
               <div class="control">
-                <input id="monthlyBenefits" class="input" type="number" placeholder="e.g. $1000" />
+                <input id="monthlyBenefits" class="input" type="number" placeholder="e.g. $1000"  />
               </div>
             </div>
-           <!-- Apply Discount R? -->
+           <!-- Apply Discount Radio Button -->
+           <div class="field">
+             <label class=" label my-1 ">Apply Discount?</label>
              <div class="control">
-               <label class=" label my-1 ">Apply Discount?</label>
                <label class="radio">
-                 <input id="apply-discounts-yes" class="my-3" type="radio" name="answer" checked>
+                 <input class="my-3" type="radio" name="applyDiscount" value="yes" checked>
                  Yes
                </label>
                <label class="radio">
-                 <input type="radio" name="answer">
+                 <input type="radio" value="no" name="applyDiscount">
                  No
                </label>
              </div>
+           </div>
              <!-- Submit & Reset Buttons -->
            <div class="field is-grouped my-3 is-grouped-centered">
              <div class="control">
@@ -104,7 +106,8 @@
         <!-- column with results -->
         <div id="results" class="column has-text-centered box box-shadow mx-4 is-hidden">
           <div class="container">
-            <h2 class="is-size-2">The total demanded is: XYZ </h2>
+            <h2 id="resultsText" class="is-size-4	"></h2>
+            <h2 id="resultsAmount" class="is-size-4 has-text-success "></h2>
           </div>
         </div>
         <!-- end of column with results -->
