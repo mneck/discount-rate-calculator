@@ -1,3 +1,18 @@
+import { discountRateValues } from "present-value-table.js";
+
+const pastAmountOwed = function () {
+  // for (let i = 0; i < cards[suitsArr].length, i++) {
+  //     for (let f = 0; f < cards[cardNumArr].length, f++) {
+  //         this.newDeck[i*13 + f] = {
+  //             cardNum: cardNumArr[r],
+  //             cardNum
+  //         }
+};
+
+const futureAmountOwed = function () {};
+
+const totalAmountOwed = function () {};
+
 /*
 
 - Lisa was born on Jan 1, 1982. She was denied benefits on Jan 1, 2022. Her net monthly benefit is $1000 less CPPD. Her benefits would be paid until she turns 65.

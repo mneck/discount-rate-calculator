@@ -1,4 +1,4 @@
-const discountValues = [
+const discountRateValues = [
   {
     year: 0,
     value: 0,
@@ -204,4 +204,4 @@ const discountValues = [
     year: 50,
     value: 34.9997,
   },
-]
+];
