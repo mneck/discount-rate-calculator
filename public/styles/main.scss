@@ -1,0 +1,9 @@
+// $primary: rgb(177, 67, 67);
+
+@import "../vendors/bulma/bulma.sass";
+
+@include mobile {
+  .center-element {
+    justify-content: center;
+  }
+}

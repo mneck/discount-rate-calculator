@@ -1,0 +1,11 @@
+{
+  "name": "discount-rate-calculator",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:jonahakaplan/discount-rate-calculator",
+  "author": "JonahAndersKaplan <jonah.anders.kaplan@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "bulma": "^0.9.4"
+  }
+}
