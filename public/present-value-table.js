@@ -1,7 +1,9 @@
+// https://www.canlii.org/en/bc/laws/regu/bc-reg-352-81/latest/bc-reg-352-81.html?autocompleteStr=352%2F81&autocompletePos=1
+
 const discountValues = [
   {
     year: 0,
-    value: 0,
+    discountValue: 0,
   },
   {
     year: 1,
@@ -204,4 +206,6 @@ const discountValues = [
     year: 50,
     value: 34.9997,
   },
-]
+];
+
+export default discountValues;

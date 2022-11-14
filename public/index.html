@@ -40,7 +40,7 @@
 <!-- form -->
     <section class="section center">
       <div class="container">
-        <div class="columns">
+        <div class="columns is-vcentered">
           <!-- column with form -->
           <div class="column is-5 box box-shadow mx-1">
             <h2 class="is-size-4 subtitle">
@@ -59,28 +59,28 @@
              <div class="field">
                <label class="label">Client's Date of Denial</label>
                <div class="control">
-                 <input id="dateOfDenial" class="input" type="date" placeholder="Text input"  />
+                 <input id="dateOfDenial" class="input" type="date" placeholder="Text input" required />
                </div>
              </div>
+             <!-- Date of Settlement Claim -->
+          <div class="field">
+            <label class="label">Date of Settlement Claim</label>
+            <div class="control">
+              <input id="settlementClaim" class="input" type="date" placeholder="Text input" required />
+            </div>
+           </div>
              <!-- End Date -->
              <div class="field">
-               <label class="label">End Date Prescribed in Client's Claim (client's 65th birthdate)</label>
+               <label class="label">End Date Prescribed in Client's Policy (likely client's 65th birthdate)</label>
                <div class="control">
-                 <input id="endDate" class="input" type="date" placeholder="Text input"  />
-               </div>
-              </div>
-                <!-- Date of Settlement Claim -->
-             <div class="field">
-               <label class="label">Date of Settlement Claim</label>
-               <div class="control">
-                 <input id="settlementClaim" class="input" type="date" placeholder="Text input"  />
+                 <input id="endDate" class="input" type="date" placeholder="Text input" required />
                </div>
               </div>
               <!-- Monthly Benefits -->
               <div class="field">
               <label class="label">Client's Monthly Benefits </label>
               <div class="control">
-                <input id="monthlyBenefits" class="input" type="number" placeholder="e.g. $1000"  />
+                <input id="monthlyBenefits" class="input" type="number" placeholder="e.g. $1000" required />
               </div>
             </div>
            <!-- Apply Discount Radio Button -->
@@ -112,9 +112,22 @@
         <!-- end of column with form -->
         <!-- column with results -->
         <div id="results" class="column has-text-centered box box-shadow mx-4 is-hidden">
-          <div class="container">
-            <h2 id="resultsText" class="is-size-4	"></h2>
-            <h2 id="resultsAmount" class="is-size-4 has-text-success "></h2>
+          <div class= container>
+            <!-- past amount results -->
+            <div class="container py-2">
+              <h2 id="pastResultsText" class="is-size-4	"></h2>
+              <h2 id="pastResultsAmount" class="is-size-4 has-text-success "></h2>
+            </div>
+            <!-- future amount results -->
+             <div class="container py-2">
+              <h2 id="futureResultsText" class="is-size-4	"></h2>
+              <h2 id="futureResultsAmount" class="is-size-4 has-text-success "></h2>
+            </div>
+            <!-- total  amount results -->
+             <div class="container py-2">
+              <h2 id="totalResultsText" class="is-size-4	"></h2>
+              <h2 id="totalResultsAmount" class="is-size-4 has-text-success "></h2>
+            </div>
           </div>
         </div>
         <!-- end of column with results -->
@@ -144,6 +157,6 @@
     </div> -->
 
     <footer></footer>
-    <script src="calculator.js"></script>
+    <script type="module" src="calculator.js"></script>
   </body>
 </html>

@@ -1,56 +1,88 @@
+import discountValues from "./present-value-table.js";
+
 // selecting DOM elements
-// const dateOfBirth = document.getElementById("dateOfBirth");
 const dateOfDenial = document.getElementById("dateOfDenial");
 const endOfBenefitsDate = document.getElementById("endDate");
 const settlementClaimDate = document.getElementById("settlementClaim");
 const monthlyBenefits = document.getElementById("monthlyBenefits");
 const resultsDOM = document.getElementById("results");
-const resultsText = document.getElementById("resultsText");
-const resultsAmount = document.getElementById("resultsAmount");
+const pastResultsText = document.getElementById("pastResultsText");
+const pastResultsAmount = document.getElementById("pastResultsAmount");
+const futureResultsText = document.getElementById("futureResultsText");
+const futureResultsAmount = document.getElementById("futureResultsAmount");
+const totalResultsText = document.getElementById("totalResultsText");
+const totalResultsAmount = document.getElementById("totalResultsAmount");
 const resetBtn = document.getElementById("resetBtn");
 const form = document.querySelector(".form");
+
+// helper function to clear the results HTML elements each time the user submits or resets the form
+const resetResults = () => {
+  pastResultsText.textContent = "";
+  pastResultsAmount.textContent = "";
+  futureResultsText.textContent = "";
+  futureResultsAmount.textContent = "";
+  totalResultsText.textContent = "";
+  totalResultsAmount.textContent = "";
+};
 
 // form submission listener
 form.addEventListener("submit", (e) => {
   e.preventDefault();
-  // const dateOfBirthValue = dateOfBirth.value;
+  resetResults();
   const dateOfDenialValue = dateOfDenial.value;
   const endOfBenefitsDateValue = endOfBenefitsDate.value;
   const settlementClaimDateValue = settlementClaimDate.value;
   const monthlyBenefitsValue = monthlyBenefits.value;
   //
   resultsDOM.classList.remove("is-hidden");
-  //
-  calculatePastBenefitsDays(
+
+  // calculate past benefits
+  const pastTotal = calculatePastBenefitsOwed(
     dateOfDenialValue,
     settlementClaimDateValue,
     monthlyBenefitsValue,
     endOfBenefitsDateValue
   );
-  // calculateFutureBenefitsDays(settlementClaimDate, endOfBenefitsDate);
-  // convertToDailyBenefits(monthlyBenefits);
+
+  // append past benefits owing to DOM
+  let pastText = document.createTextNode(`past amount owing`);
+  pastResultsText.appendChild(pastText);
+  let pastAmount = document.createTextNode(`$${pastTotal.toFixed(2)}`);
+  pastResultsAmount.appendChild(pastAmount);
+
+  // calculate future benefits owing and append result to DOM
+  const futureTotal = calculateFutureBenefitsOwed(
+    settlementClaimDateValue,
+    endOfBenefitsDateValue,
+    monthlyBenefitsValue
+  );
+
+  // append future benefits owing to DOM
+  let futureText = document.createTextNode(
+    `future amount owing (not including discount)`
+  );
+  futureResultsText.appendChild(futureText);
+  let futureAmount = document.createTextNode(`$${futureTotal.toFixed(2)}`);
+  futureResultsAmount.appendChild(futureAmount);
+
+  // calculate total amount (past total + future total) and append result to DOM
+  const totalValue = pastTotal + futureTotal;
+  console.log(totalValue);
+  let totalText = document.createTextNode(`total amount owing`);
+  totalResultsText.appendChild(totalText);
+  let totalAmount = document.createTextNode(`$${totalValue.toFixed(2)}`);
+  totalResultsAmount.appendChild(totalAmount);
 });
 
-// form reset listener
+// form reset button listener
 resetBtn.addEventListener("click", () => {
   resultsDOM.classList.add("is-hidden");
+  resetResults();
 });
 
-// convert monthly benefits to yearly & daily benefits
-const convertToDailyBenefits = (monthly) => {
-  const yearlyBenefits = monthly * 12;
-  const dailyBenefits = yearlyBenefits / 365;
-  // console.log(`daily benefits are $${dailyBenefits}`);
-  return dailyBenefits;
-};
-
 // calculate PAST BENEFITS - total days owed: number of days between DATE OF DENIAL and PROPOSAL DATE
-// benefits end date is before denial date: NO PAST benefits due, NO FUTURE benefits due
-// benefits end date is equal to settlement
-// benefits end date is after denial date, settlement claim is before end date
-// benefits end date is after denial date, settlement claim is before end date
 
-const calculatePastBenefitsDays = (
+const calculatePastBenefitsOwed = (
   dateOfDenial,
   dateOfProposal,
   monthlyValue,
@@ -65,6 +97,8 @@ const calculatePastBenefitsDays = (
     console.log(
       "no benefits are due - date of denial was on or before end date of client's claim"
     );
+    const amountPastOwed = 0;
+    return amountPastOwed;
     resultsText.textContent =
       "no benefits are due - date of denial was on or before end date of client's claim";
 
@@ -77,13 +111,12 @@ const calculatePastBenefitsDays = (
     console.log(`past days owed: ${daysBetweenDenialandProposal}`);
     const yearlyBenefits = monthlyValue * 12;
     const dailyBenefits = yearlyBenefits / 365;
-    const amountOwed = daysBetweenDenialandProposal * dailyBenefits;
+    const amountPastOwed = daysBetweenDenialandProposal * dailyBenefits;
     console.log("benefits end date is equal to or after date of proposal");
     console.log(
-      `past amount owing - from date of denial to date of settlment claim date $${amountOwed}`
+      `past amount owing - from date of denial to date of settlment claim date $${amountPastOwed}`
     );
-    resultsText.textContent = `past amount owing - from date of denial to date of settlment claim date:`;
-    resultsAmount.textContent = `$${amountOwed.toFixed(2)}`;
+    return amountPastOwed;
 
     // if benefits ended prior to date of settlement claim, calculate 'past owing' baed on # of days between {date of denial} and {end date of benefits}
   } else if (endOfBenefitsDate.getTime() < proposalDate.getTime()) {
@@ -95,23 +128,40 @@ const calculatePastBenefitsDays = (
     console.log(`past days owed: ${daysBetweenDenialandEnd}`);
     const yearlyBenefits = monthlyValue * 12;
     const dailyBenefits = yearlyBenefits / 365;
-    const amountOwed = daysBetweenDenialandEnd * dailyBenefits;
+    const amountPastOwed = daysBetweenDenialandEnd * dailyBenefits;
     console.log(
-      `past amount owing - from date of denial to end date prescribed in client's claim $${amountOwed}`
+      `past amount owing - from date of denial to end date prescribed in client's claim $${amountPastOwed}`
     );
-    resultsText.textContent = `past amount owing - from date of denial to end date prescribed in claim:`;
-    resultsAmount.textContent = `$${amountOwed.toFixed(2)}`;
+    return amountPastOwed;
   }
 };
 
-// calculate FUTURE BENEFITS days:  number of days between PROPOSAL DATE and END OF BENEFIT PERIOD
+// calculate FUTURE BENEFITS:  number of days between PROPOSAL DATE and END OF BENEFIT PERIOD
 
-const calculateFutureBenefitsDays = (proposal, end) => {
+const calculateFutureBenefitsOwed = (proposal, end, monthlyBenefits) => {
   const proposalDate = new Date(proposal);
   const endDate = new Date(end);
-  const differenceInTime = endDate.getTime() - proposalDate.getTime();
-  const differenceInDays = differenceInTime / (1000 * 60 * 60 * 24);
-  // console.log(`future benefits are owed for ${differenceInDays} days`);
+
+  // if 'end date' is before 'settlement claim date' , no future benefits are owed
+  if (endDate.getTime() <= proposalDate.getTime()) {
+    const amountFutureOwed = 0;
+    return amountFutureOwed;
+
+    // if 'end date' is after 'settlement claim date
+  } else if (endDate.getTime() > proposalDate.getTime()) {
+    const differenceInTime = endDate.getTime() - proposalDate.getTime();
+    const futureDaysOwing = differenceInTime / (1000 * 60 * 60 * 24);
+    console.log(`future days owing = ${futureDaysOwing}`);
+    const yearlyBenefits = monthlyBenefits * 12;
+    const dailyBenefits = yearlyBenefits / 365;
+    const amountFutureOwed = futureDaysOwing * dailyBenefits;
+    console.log(
+      `future amount owing (without discount applied) = $${amountFutureOwed.toFixed(
+        2
+      )}`
+    );
+    return amountFutureOwed;
+  }
 };
 
 /*
