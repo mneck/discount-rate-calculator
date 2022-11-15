@@ -2,6 +2,48 @@
 
 @import "../vendors/bulma/bulma.sass";
 
+body .subtitle,
+body .title {
+  color: $dark;
+}
+
+body.dark {
+  background-color: $dark;
+  color: $light;
+}
+
+.img {
+  -webkit-filter: invert(100%);
+  filter: progid:DXImageTransform.Microsoft.BasicImage(invert='1');
+}
+
+body.dark .subtitle,
+body.dark .title {
+  color: $light;
+}
+
+.section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  // height: 100vh;
+  // text-align: center;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  color: $light;
+  padding: 0.8rem;
+  background: $dark;
+  border-radius: 6px;
+}
+
+body.dark button {
+  background: $light;
+  color: $dark;
+}
+
 @include mobile {
   .center-element {
     justify-content: center;

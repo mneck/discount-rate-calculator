@@ -15,6 +15,28 @@ const totalResultsAmount = document.getElementById("totalResultsAmount");
 const resetBtn = document.getElementById("resetBtn");
 const form = document.querySelector(".form");
 
+// dark mode
+const body = document.querySelector("body");
+const img = document.getElementById("img");
+const navbar = document.getElementById("navbar");
+const toggle = document.getElementById("toggle");
+const description = document.getElementById("description");
+
+toggle.addEventListener("click", () => {
+  const bodyCheck = body.classList.contains("dark");
+  if (bodyCheck) {
+    body.className = "";
+    description.className = "section hero is-primary py-1";
+    navbar.className = "navbar has-shadow is-white";
+    img.className = "py-2 px-2";
+  } else {
+    body.className = "dark";
+    description.className = "section hero dark py-1";
+    navbar.className = "dark";
+    img.className = "py-2 px-2 img";
+  }
+});
+
 // helper function to clear the results HTML elements each time the user submits or resets the form
 const resetResults = () => {
   pastResultsText.textContent = "";
@@ -108,14 +130,14 @@ const calculatePastBenefitsOwed = (
       proposalDate.getTime() - denialDate.getTime();
     const daysBetweenDenialandProposal =
       timeBetweenDenialandProposal / (1000 * 60 * 60 * 24);
-    console.log(`past days owed: ${daysBetweenDenialandProposal}`);
+    // console.log(`past days owed: ${daysBetweenDenialandProposal}`);
     const yearlyBenefits = monthlyValue * 12;
     const dailyBenefits = yearlyBenefits / 365;
     const amountPastOwed = daysBetweenDenialandProposal * dailyBenefits;
-    console.log("benefits end date is equal to or after date of proposal");
-    console.log(
-      `past amount owing - from date of denial to date of settlment claim date $${amountPastOwed}`
-    );
+    // console.log("benefits end date is equal to or after date of proposal");
+    // console.log(
+    //   `past amount owing - from date of denial to date of settlment claim date $${amountPastOwed}`
+    // );
     return amountPastOwed;
 
     // if benefits ended prior to date of settlement claim, calculate 'past owing' baed on # of days between {date of denial} and {end date of benefits}
@@ -129,9 +151,9 @@ const calculatePastBenefitsOwed = (
     const yearlyBenefits = monthlyValue * 12;
     const dailyBenefits = yearlyBenefits / 365;
     const amountPastOwed = daysBetweenDenialandEnd * dailyBenefits;
-    console.log(
-      `past amount owing - from date of denial to end date prescribed in client's claim $${amountPastOwed}`
-    );
+    // console.log(
+    //   `past amount owing - from date of denial to end date prescribed in client's claim $${amountPastOwed}`
+    // );
     return amountPastOwed;
   }
 };
@@ -154,7 +176,58 @@ const calculateFutureBenefitsOwed = (proposal, end, monthlyBenefits) => {
     console.log(`future days owing = ${futureDaysOwing}`);
     const yearlyBenefits = monthlyBenefits * 12;
     const dailyBenefits = yearlyBenefits / 365;
-    const amountFutureOwed = futureDaysOwing * dailyBenefits;
+    const yearOneDiscount = discountValues[0].discountValue;
+    const yearTwoDiscount = discountValues[1].discountValue;
+    console.log(`year one discount: ${yearOneDiscount}`);
+    console.log(`year two discount: ${yearTwoDiscount}`);
+
+    if (futureDaysOwing <= 365) {
+      // const amountFutureOwed = futureDaysOwing * dailyBenefits;
+      const amountFutureOwedWithDiscountYearOne =
+        futureDaysOwing * dailyBenefits * yearOneDiscount;
+      const amountFutureOwedWithoutDiscountYearOne =
+        futureDaysOwing * dailyBenefits;
+      console.log(
+        ` amount future owed WITHOUT discount ${amountFutureOwedWithoutDiscountYearOne}`
+      );
+      console.log(
+        ` amount future owed WITH DISCOUNT ${amountFutureOwedWithDiscountYearOne}`
+      );
+      const amountFutureOwed = amountFutureOwedWithDiscountYearOne;
+      return amountFutureOwed;
+      // year two
+    } else if (futureDaysOwing > 365 && futureDaysOwing <= 731) {
+      const amountFutureOwedWithDiscountYearOne =
+        futureDaysOwing * dailyBenefits * yearOneDiscount;
+      const amountFutureOwedWithoutDiscountYearOne =
+        futureDaysOwing * dailyBenefits;
+      const amountFutureOwedWithDiscountYearTwo =
+        futureDaysOwing * dailyBenefits * yearTwoDiscount;
+      const amountFutureOwedWithoutDiscountYearTwo =
+        futureDaysOwing * dailyBenefits;
+      console.log(
+        ` amount future owed WITHOUT discount ${amountFutureOwedWithoutDiscountYearOne}`
+      );
+      console.log(
+        ` amount future owed WITH DISCOUNT ${amountFutureOwedWithDiscountYearOne}`
+      );
+      console.log(
+        ` amount future owed WITHOUT discount ${amountFutureOwedWithoutDiscountYearTwo}`
+      );
+      console.log(
+        ` amount future owed WITH DISCOUNT ${amountFutureOwedWithDiscountYearTwo}`
+      );
+      const amountFutureOwed =
+        amountFutureOwedWithDiscountYearOne +
+        amountFutureOwedWithDiscountYearTwo;
+      console.log(amountFutureOwed);
+      return amountFutureOwed;
+    }
+    // const amountFutureOwed = futureDaysOwing * dailyBenefits;
+    // add discount rate
+    // if statement - if futureDaysOwing is < 365, multiply futureDaysOwing by discount rate year 1...
+    // else if between 365 - 731...
+    // a variable for each year... let year1 =
     console.log(
       `future amount owing (without discount applied) = $${amountFutureOwed.toFixed(
         2

@@ -9,12 +9,13 @@
     <link rel="stylesheet" href="styles/main.css">
   </head>
   <body>
-    <nav class="navbar has-shadow is-white">
+    <nav id="navbar" class="navbar has-shadow is-white">
       <!-- abacus image -->
       <div class="navbar-brand">
         <div class="navbar-item">
           <img
-            src="./abacus.jpg"
+            id = "img"
+            src="./abacus.svg"
             alt="abacus image"
             style="max-height: 100px"
             class="py-2 px-2"
@@ -28,7 +29,7 @@
       </div>
     </nav>
     <!-- website description -->
-    <section class="section hero is-primary py-1 ">
+    <section id="description" class="section hero is-primary py-1 ">
       <div class="container py-1 ">
         <div class="column is-5 ">
             <h1 class="is-size-5">
@@ -40,12 +41,12 @@
 <!-- form -->
     <section class="section center">
       <div class="container">
+        <h2 class="is-size-4 subtitle">
+          Please provide your client's information here:
+        </h2>
         <div class="columns is-vcentered">
           <!-- column with form -->
           <div class="column is-5 box box-shadow mx-1">
-            <h2 class="is-size-4 subtitle">
-              Please provide your client's information here:
-            </h2>
             <!-- Form -->
             <form class="form" name="form">
               <!-- Date of Birth
@@ -59,28 +60,28 @@
              <div class="field">
                <label class="label">Client's Date of Denial</label>
                <div class="control">
-                 <input id="dateOfDenial" class="input" type="date" placeholder="Text input" required />
+                 <input id="dateOfDenial" class="input" type="date" placeholder="Text input" />
                </div>
              </div>
              <!-- Date of Settlement Claim -->
           <div class="field">
             <label class="label">Date of Settlement Claim</label>
             <div class="control">
-              <input id="settlementClaim" class="input" type="date" placeholder="Text input" required />
+              <input id="settlementClaim" class="input" type="date" placeholder="Text input" />
             </div>
            </div>
              <!-- End Date -->
              <div class="field">
                <label class="label">End Date Prescribed in Client's Policy (likely client's 65th birthdate)</label>
                <div class="control">
-                 <input id="endDate" class="input" type="date" placeholder="Text input" required />
+                 <input id="endDate" class="input" type="date" placeholder="Text input" />
                </div>
               </div>
               <!-- Monthly Benefits -->
               <div class="field">
               <label class="label">Client's Monthly Benefits </label>
               <div class="control">
-                <input id="monthlyBenefits" class="input" type="number" placeholder="e.g. $1000" required />
+                <input id="monthlyBenefits" class="input" type="number" placeholder="e.g. $1000" />
               </div>
             </div>
            <!-- Apply Discount Radio Button -->
@@ -133,30 +134,12 @@
         <!-- end of column with results -->
       </div>
     </section>
-  
     <!-- footer -->
-    <footer class="footer column is-narrow py-5">
-  <div class="is-size-6 my-1 content has-text-centered">
-    <p>
-      This is a tool to calculate future benefits as a lump sum in BC
-        litigation. None of the information provided herein is intended as legal
-        advice. Do not rely on any of this information as legal advice. If you
-        have a legal problem, consult a lawyer.
-    </p>
-  </div>
-</footer>
-
-    <!-- <h1 class="is-size-2 has-text-centered">
-      How to Valuate Long Term Disability Benefits in British Columbia
-    </h1>
-    <div class="section">
-      <h2 class="is-size-3 is-italic">Hi there!</h2>
-      <p class="is-size-4">
-        
-      </p>
-    </div> -->
-
-    <footer></footer>
+    <div class="footer columns is-centered">
+      <div column >
+        <button id="toggle">Dark Mode Toggle</button>
+      </div>
+    </div>
     <script type="module" src="calculator.js"></script>
   </body>
 </html>

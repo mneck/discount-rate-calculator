@@ -7726,6 +7726,39 @@ a.has-text-danger-dark:hover, a.has-text-danger-dark:focus {
   background-color: #fafafa;
   padding: 3rem 1.5rem 6rem; }
 
+body .subtitle,
+body .title {
+  color: #363636; }
+
+body.dark {
+  background-color: #363636;
+  color: whitesmoke; }
+
+.img {
+  -webkit-filter: invert(100%);
+  filter: progid:DXImageTransform.Microsoft.BasicImage(invert='1'); }
+
+body.dark .subtitle,
+body.dark .title {
+  color: whitesmoke; }
+
+.section {
+  display: flex;
+  align-items: center;
+  justify-content: center; }
+
+button {
+  cursor: pointer;
+  border: none;
+  color: whitesmoke;
+  padding: 0.8rem;
+  background: #363636;
+  border-radius: 6px; }
+
+body.dark button {
+  background: whitesmoke;
+  color: #363636; }
+
 @media screen and (max-width: 768px) {
   .center-element {
     justify-content: center; } }
